@@ -470,7 +470,9 @@ from recent to non-recent for rooms updated in the past hour."
 
 (ement-room-list-define-column #("Unread" 0 6 (help-echo "Unread events (Notifications:Highlights)")) (:align 'right)
   (pcase-let* ((`[,(cl-struct ement-room unread-notifications) ,_session] item)
-               ((map notification_count highlight_count) unread-notifications))
+               ((map notification_count highlight_count) unread-notifications)
+               (notification_count (or notification_count 0))
+               (highlight_count (or highlight_count 0)))
     (if (or (not unread-notifications)
             (and (equal 0 notification_count)
                  (equal 0 highlight_count)))

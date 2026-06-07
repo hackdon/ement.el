@@ -1570,6 +1570,8 @@ is not at the latest known message event."
                ((cl-struct ement-session user) session)
                ((cl-struct ement-user (id our-id)) user)
                ((map notification_count highlight_count) unread-notifications)
+               (notification_count (or notification_count 0))
+               (highlight_count (or highlight_count 0))
                (fully-read-event-id (map-nested-elt (alist-get "m.fully_read" account-data nil nil #'equal)
                                                     '(content event_id))))
     ;; MAYBE: Ignore whether the buffer is modified.  Since we have a better handle on how

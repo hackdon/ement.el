@@ -296,7 +296,9 @@ If EVENT's sender is SESSION's user, returns nil."
   "Return non-nil if ROOM has unread notifications.
 According to the room's notification configuration on the server."
   (pcase-let* (((cl-struct ement-room unread-notifications) room)
-               ((map notification_count highlight_count) unread-notifications))
+               ((map notification_count highlight_count) unread-notifications)
+               (notification_count (or notification_count 0))
+               (highlight_count (or highlight_count 0)))
     (not (and (equal 0 notification_count)
               (equal 0 highlight_count)))))
 
